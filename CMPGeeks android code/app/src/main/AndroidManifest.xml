@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.cmpgeeks">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LogInActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ForgetPassword" />
+        <activity
+            android:name=".HomeScreen"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdatePost" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up" />
+        <activity android:name=".SignUpDoctorsActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".CourseActivity"
+            android:label="@string/title_activity_course"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateCourse" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateMaterial" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateAssignment" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateProject" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateOfficeHour" />
+        <activity android:name=".CreateUpdateActivity.CreateUpdateTeam" />
+        <activity android:name=".StatisticsActivity"></activity>
+    </application>
+
+</manifest> <!-- android:theme="@style/AppTheme" -->

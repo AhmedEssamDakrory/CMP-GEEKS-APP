@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    >
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/background_color_book"
+        android:id="@+id/contact_image"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="This is teacher name .... "
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@id/contact_image"
+        />
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="This is teacher type .... "
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:textSize="10dp"
+        android:textColor="@color/colorBackground"
+        android:layout_below="@id/name"
+        android:paddingBottom="8dp"
+        android:layout_toRightOf="@id/contact_image"
+        />
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

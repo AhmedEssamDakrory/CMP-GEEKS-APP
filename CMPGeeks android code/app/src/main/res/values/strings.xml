@@ -1,0 +1,120 @@
+<resources>
+    <string name="app_name">CMP Geeks</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="read_it_together">Read it together</string>
+    <string name="exit">Exit</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="forget_password_instruction">Enter your E-mail and you will receive your password on your E-mail</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_post">Edit Post</string>
+    <string name="delete_post">Delete Post</string>
+    <string name="creat_post">Creat Post</string>
+    <string name="start_writing_post">Write Your Post ...</string>
+    <string name="title_activity_sign_up">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="select_year">Education Year :</string>
+    <string name="error_invalid_year">You must select one</string>
+    <string name="wrong_password">Incorrect Password</string>
+    <string name="prompt_sec">SEC</string>
+    <string name="prompt_bn">BN</string>
+    <string name="error_invalid_sec">SEC must be (1 or 2)</string>
+    <string name="error_invalid_bn">BN must be (1 ~ 45)</string>
+    <string name="error_invalid_name_field">Both of them must be at lest one character</string>
+    <string name="edit">Edit Exist</string>
+    <string name="delete">Delete</string>
+    <string name="creat">Create new</string>
+    <string name="log_out">Log Out</string>
+    <string name="prompt_education_year">Education years</string>
+    <string name="prompt_teacher_type">Teacher Type</string>
+    <string name="prompt_graduation_year">Graduation Year</string>
+    <string name="error_invalid_gy">Invalid year</string>
+    <string name="prompt_selector">Selector</string>
+
+    <string-array name="education_years">
+        <item>First year</item>
+        <item>Second year</item>
+        <item>Third year</item>
+        <item>Fourth year</item>
+    </string-array>
+
+    <string-array name="teacher_type">
+        <item>Doctor</item>
+        <item>Teacher Assistant</item>
+    </string-array>
+    <string name="title_activity_course">CourseActivity</string>
+    <string name="prompt_teacher_gy">Graduation year</string>
+    <string name="empty_list">Empty list</string>
+
+
+    <string name="make_an_order">Make an order</string>
+    <string name="dialog_title">Items available in a shop</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+    <string name="prompt_material_type_year">Material type</string>
+    <string name="max_team_member">Maxmum number of team\'s member</string>
+    <string name="submit_email">Submit email</string>
+    <string name="select_teacher">Select Teacher</string>
+    <string name="select_day">Select Day</string>
+    <string name="prompt_days_names">Days\' names</string>
+    <string name="select_team_members">Select team members</string>
+    <string name="statistics">Statistics</string>
+
+    <string-array name="shopping_item">
+        <item>Onion</item>
+        <item>Sausage</item>
+        <item>Milk</item>
+        <item>Garlic</item>
+        <item>Beef</item>
+        <item>Veggies</item>
+        <item>Olive</item>
+        <item>Cheese</item>
+        <item>Tuna</item>
+        <item>Mushrooms</item>
+    </string-array>
+
+    <string-array name="material_type">
+        <item>Lecture Slides</item>
+        <item>Written Lecture</item>
+        <item>Sheet</item>
+        <item>Sheet Solution</item>
+        <item>Section</item>
+        <item>Note</item>
+        <item>Video</item>
+        <item>Reference</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="day_names">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+    </string-array>
+
+
+</resources>

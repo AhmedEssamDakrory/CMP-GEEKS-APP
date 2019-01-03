@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_first"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="first" />
+        <item
+            android:id="@+id/nav_second"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="second" />
+        <item
+            android:id="@+id/nav_third"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="third" />
+        <item
+            android:id="@+id/nav_fourth"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="fourth"
+            />
+        <item
+            android:id="@+id/nav_fifth"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="sixth"
+            />
+    </group>
+
+  <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/action_settings" />
+            <item
+                android:id="@+id/nav_statistics"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/statistics" />
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/log_out" />
+        </menu>
+    </item>
+
+</menu>

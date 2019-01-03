@@ -1,0 +1,311 @@
+
+
+
+create database cmp_geeks;
+
+Create TABLE Authentication (
+Email varchar(100) NOT NULL ,
+Password varchar(20) NOT NULL,
+Previlage varchar(1) NOT NULL,
+PRIMARY KEY (Email)
+);
+
+delimiter //
+create trigger trg_trigger_Auth before insert on Authentication
+for each row
+begin
+    declare msg varchar(128);
+    declare PassLength INT;
+    SET PassLength = (SELECT LENGTH(new.Password));
+    if new.Previlage not in ('S','D','T','R') OR !(new.Email LIKE '%@%') OR (PassLength < 8) then
+        set msg = concat('MyTriggerError: Trying to insert a value outside the domain ', cast(new.Previlage as char));
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+create trigger trg_trigger_Auth2 before update on Authentication
+for each row
+begin
+    declare msg varchar(128);
+    declare PassLength INT;
+    SET PassLength = (SELECT LENGTH(new.Password));
+    if new.Previlage not in ('S','D','T','R') OR !(new.Email LIKE '%@%') OR (PassLength < 8) then
+        set msg = concat('MyTriggerError: Trying to insert a value outside the domain ', cast(new.Previlage as char));
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+delimiter ;
+
+
+CREATE TABLE Post (
+Id int NOT NULL AUTO_INCREMENT ,
+Color varchar(20) ,
+Text varchar(1000) NOT NULL,
+Date datetime ,
+RepresentativeId INT ,
+Fname varchar(20) , 
+Lname varchar(20) ,
+Gyear INT ,
+Syear int ,               
+PRIMARY KEY (Id)
+);
+
+CREATE TABLE Teacher (
+Fname varchar(20) NOT NULL,
+Lname varchar(20) NOT NULL,
+Gyear int NOT NULL,
+Email varchar(100),
+PRIMARY KEY (Fname,Lname,Gyear),
+FOREIGN KEY (Email) REFERENCES Authentication(Email) ON UPDATE CASCADE ON DELETE SET NULL 
+);
+
+
+
+
+
+CREATE TABLE Office_Hours (
+Day varchar(10) NOT NULL check (Day in ('Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday')) ,
+Start  time NOT NULL,
+Until time NOT NULL,
+Fname varchar(20) NOT NULL,
+Lname varchar(20) NOT NULL,
+Gyear int NOT NULL,
+PRIMARY KEY (Day,Start,Until,Fname,Lname,Gyear),
+FOREIGN KEY (Fname,Lname,Gyear) REFERENCES teacher(Fname,Lname,Gyear) ON UPDATE CASCADE ON DELETE CASCADE 
+);
+
+delimiter //
+create trigger trg_trigger_Office_Hours before insert on Office_Hours
+for each row
+begin
+    declare msg varchar(128);
+    if new.Day not in ('Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday') then
+        set msg = concat('MyTriggerError: Please insert a proper day name ', cast(new.Day as char));
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+	
+end
+//
+
+create trigger trg_trigger_Office_Hours2 before update on Office_Hours
+for each row
+begin
+    declare msg varchar(128);
+    if new.Day not in ('Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday') then
+        set msg = concat('MyTriggerError: Please insert a proper day name ', cast(new.Day as char));
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+	
+end
+//
+
+delimiter ;
+
+CREATE TABLE Student (
+Id int NOT NULL ,
+Sec int NOT NULL  ,
+Bn int NOT NULL ,
+Fname varchar(100) NOT NULL ,
+Lname varchar(100) NOT NULL ,
+Email varchar(100) ,
+YearId int ,
+PRIMARY KEY (Id),
+FOREIGN KEY (Email) REFERENCES Authentication(Email) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+delimiter //
+create trigger trg_trigger_Student before insert on Student
+for each row
+begin
+    declare msg varchar(128);
+    if (new.Id <= 1100 OR new.Id >= 4235) OR (new.Sec != 1 AND new.Sec != 2 ) OR (new.Bn <= 0 OR new.Bn >= 36 )   then
+        set msg = concat('MyTriggerError: Please insert a proper information ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+create trigger trg_trigger_Student2 before update on Student
+for each row
+begin
+    declare msg varchar(128);
+    if (new.Id <= 1100 OR new.Id >= 4235) OR (new.Sec != 1 AND new.Sec != 2 ) OR (new.Bn <= 0 OR new.Bn >= 36 )   then
+        set msg = concat('MyTriggerError: Please insert a proper information ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+delimiter ;
+
+CREATE TABLE StYear (
+YearNumber int NOT NULL ,
+Gyear int NOT NULL,
+NumOfStudents int ,
+RepresentativeId int,
+PRIMARY KEY (YearNumber),
+FOREIGN KEY (RepresentativeId) REFERENCES Student(Id) on update cascade on delete set NULL 
+);
+
+alter TABLE Student add FOREIGN KEY (yearId) REFERENCES StYear(YearNumber) on update cascade on delete no action  
+
+alter TABLE Post add FOREIGN KEY (RepresentativeId) REFERENCES student(Id) on update cascade on delete no action 
+
+
+alter table Post add foreign key (Syear) REFERENCES StYear(YearNumber) on update no action on delete no action 
+
+
+delimiter //
+create trigger trg_trigger_StYear before insert on StYear
+for each row
+begin
+    declare msg varchar(128);
+    if !(new.YearNumber > 0 OR new.YearNumber <5) OR !(new.Gyear > 2018 ) OR !(new.NumOfStudents > -1)   then
+        set msg = concat('MyTriggerError: Please insert proper information ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+create trigger trg_trigger_StYear2 before update on StYear
+for each row
+begin
+    declare msg varchar(128);
+    if !(new.YearNumber > 0 OR new.YearNumber <5) OR !(new.Gyear > 2018 ) OR !(new.NumOfStudents > -1)   then
+        set msg = concat('MyTriggerError: Please insert proper information ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+
+delimiter ;
+
+CREATE TABLE Course (
+CourseId varchar(20) NOT NULL ,
+CourseName varchar(20),
+YearNum int ,
+PRIMARY KEY (CourseId),
+FOREIGN KEY (YearNum) REFERENCES StYear(YearNumber) ON UPDATE NO ACTION ON DELETE NO Action
+);
+
+CREATE TABLE Assignment (
+AssNum int NOT NULL AUTO_INCREMENT ,
+CourseId varchar(20) NOT NULL ,
+Link varchar (200) ,
+Deadline datetime ,
+SubmitEmail varchar (100) ,
+PRIMARY KEY (AssNum,CourseId),
+FOREIGN KEY (CourseId) REFERENCES Course(CourseId) on update cascade on delete cascade
+);
+
+
+
+CREATE TABLE Material (
+Topic varchar(100) NOT NULL ,
+CourseId varchar(20) NOT NULL ,
+PRIMARY KEY (Topic,CourseId),
+FOREIGN KEY (CourseId) REFERENCES Course(CourseId) on update cascade on delete cascade
+);
+
+CREATE TABLE Content (
+Link varchar (200) NOT NULL,
+Type varchar(15) NOT NULL, 
+Topic varchar(100) NOT NULL ,
+CourseId varchar(20) NOT NULL ,
+PRIMARY KEY (Topic,CourseId,Link,Type),
+FOREIGN KEY (Topic ,CourseId) REFERENCES Material(Topic , CourseId) on update cascade on delete cascade
+);
+
+CREATE TABLE Project (
+Title  varchar (20) NOT NULL,
+CourseId varchar(20) NOT NULL ,
+Link varchar (200) NOT NULL,
+MaxNum int NOT NULL,
+SubmitEmail varchar (200),
+PRIMARY KEY (Title,CourseId),
+FOREIGN KEY (CourseId) REFERENCES Course(CourseId) on update cascade on delete cascade
+);
+
+CREATE TABLE Teach (
+Fname varchar(20) NOT NULL,
+Lname varchar(20) NOT NULL,
+Gyear int NOT NULL,
+CourseId varchar(20) NOT NULL,
+PRIMARY KEY (Fname,Lname,Gyear,CourseId),
+FOREIGN KEY (Fname,Lname,Gyear) REFERENCES Teacher(Fname , Lname , Gyear) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (CourseId) REFERENCES Course(CourseId) on update cascade on delete cascade
+
+);
+
+CREATE TABLE Team (
+TeamNumber int NOT NULL ,
+Title  varchar (20) NOT NULL,
+CourseId varchar(20) NOT NULL ,
+ActualNum int ,
+PRIMARY KEY (TeamNumber ,Title,CourseId),
+FOREIGN KEY (Title,CourseId) REFERENCES Project(Title , CourseId) on update cascade on delete cascade
+);
+
+delimiter //
+create trigger trg_trigger_Team before insert on Team
+for each row
+begin
+    declare msg varchar(128);
+    if (new.TeamNumber  <= 0 )   then
+        set msg = concat('MyTriggerError: Please insert number > 0 ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+create trigger trg_trigger_Team2 before update on Team
+for each row
+begin
+    declare msg varchar(128);
+    if (new.TeamNumber  <= 0 )   then
+        set msg = concat('MyTriggerError: Please insert number > 0 ');
+        signal sqlstate '45000' set message_text = msg;
+    end if;
+
+end
+//
+
+delimiter ;
+
+CREATE TABLE InTeam (
+StudentId int NOT NULL,
+TeamNumber int NOT NULL,
+Title  varchar (20) NOT NULL,
+CourseId varchar(20) NOT NULL,
+PRIMARY KEY (StudentID,TeamNumber,Title,CourseId),
+FOREIGN KEY (TeamNumber,Title,CourseId) REFERENCES Team(TeamNumber , Title , CourseId) on update cascade on delete cascade,
+FOREIGN KEY (StudentId) REFERENCES Student(Id) on update cascade on delete cascade
+
+);
+
+CREATE table AssSubmit(
+StudentId int NOT NULL,
+AssNumber int NOT NULL ,
+CourseId varchar(20) NOT NULL ,
+PRIMARY KEY (StudentId,AssNumber,CourseId),
+FOREIGN KEY (StudentId) REFERENCES Student(Id) on update cascade on delete cascade ,
+FOREIGN KEY (AssNumber,CourseId) REFERENCES Assignment (AssNum , CourseId) on update cascade on delete cascade 
+);
+
+
+
+
+
+
+
